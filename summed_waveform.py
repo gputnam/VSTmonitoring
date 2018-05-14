@@ -7,11 +7,11 @@ import math
 
 # TODO @INSTILLATION: update
 def channel_list(fem):
-    return range(fem*16, (fem+1)*16)
+    return range(fem*64, (fem+1)*64)
 
 def main(args):
     adc_data_file = ROOT.TFile(args.input_file)
-    t_directory_file = adc_data_file.Get("SimpleDaqAnalysis")
+    t_directory_file = adc_data_file.Get("VSTAnalysis")
 
     adc_data = t_directory_file.Get("event") 
     adc_data.GetEntry(args.entry)
@@ -20,12 +20,6 @@ def main(args):
     if empty:
         print "Empty channel"
         return
-    if args.rms:
-        rms2 = 0
-        for channel in channel_list(args.fem):
-            rms2 += adc_data.channel_data[channel].rms * adc_data.channel_data[channel].rms
-        print "TOTAL RMS: ", math.sqrt(rms2)
-        
     
     waveform = adc_data.summed_waveforms[args.fem]
 
@@ -62,6 +56,5 @@ if __name__ == "__main__":
     parser.add_argument("-e", "--entry", type=int, default=0)
     parser.add_argument("-w", "--wait", action="store_true")
     parser.add_argument("-s", "--save", action="store_true")
-    parser.add_argument("-r", "--rms", action="store_true")
     
     main(parser.parse_args())

@@ -7,7 +7,7 @@ import math
 
 def main(args):
     fft_data_file = ROOT.TFile(args.input_file)
-    t_directory_file = fft_data_file.Get("SimpleDaqAnalysis")
+    t_directory_file = fft_data_file.Get("VSTAnalysis")
 
     fft_data = t_directory_file.Get("channel_data") 
     fft_data.GetEntry(args.entry)
