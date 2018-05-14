@@ -27,28 +27,27 @@ def weak_peak(channel_data):
 def n_peaks(channel_data):
     return float(len([x for x in channel_data.peaks if x.is_up]))
 
-def anomalous_hit(channel_data):
-    return float(len([x for x in channel_data.peaks if x.amplitude > 0]) > 1)
-
 def main(args):
     data_file = ROOT.TFile(args.input_file)
     t_directory_file = data_file.Get("VSTAnalysis")
 
     event_tree = t_directory_file.Get("event")
  
-    if args.data == "rms":
-        data_fun = rms
-    elif args.data == "weak_peak":
+    if args.data == "weak_peak":
         data_fun = weak_peak
     elif args.data == "occupancy":
         data_fun = n_peaks
-    elif args.data == "anomalous_hit":
-        data_fun = anomalous_hit
+    else: # for baseline, mean_peak_height, rms
+        data_fun = lambda data: getattr(data, args.data)
 
-    if args.data == "weak_peak" or args.data == "occupancy" or args.data == "anomalous_hit":
+    if args.data == "weak_peak" or args.data == "occupancy":
         hist = ROOT.TH1F(args.data, args.data, 20, 0., 100.)
     elif args.data == "rms":
         hist = ROOT.TH1F(args.data, args.data, 100, 0., 5.)
+    elif args.data == "baseline":
+        hist = ROOT.TH1F(args.data, args.data, 100, -10., 10.)
+    elif args.data == "mean_peak_height":
+        hist = ROOT.TH1F(args.data, args.data, 100, 20., 100.)
 
     event_tree.GetEntry(0)
     data = [0 for x in range(len(event_tree.channel_data))]
@@ -75,7 +74,7 @@ def plot(hist, args):
     canvas = ROOT.TCanvas("canvas", "Histo Canvas", 250,100,700,500)
     hist.Draw()
     hist.SetTitle("Weak Peak Distribution")
-    hist.GetXaxis().SetTitle("Weak Peak Percentage")
+    hist.GetXaxis().SetTitle(args.data)
     hist.GetYaxis().SetTitle("Number of Channels")
     canvas.Update()
     if args.wait:
