@@ -60,11 +60,12 @@ Makes a distribution of different types of data for all the channels. Note that 
 - Whether to bin by channel or by channel per event (default is to bin by channel): -p
 - Whether to print data values: -v
 - Which data metric to plot: -d data_types
-- Possible values for data_types
+- Possible values for data_types:
   - rms: the RMS noise 
   - occupancy: the hit occupancy percentage
   - mean_peak_height: the average peak height of hits
   - baseline: the pedestal value
+- Edit the file to change bounds on the histogram
 
 ### dump_header.py
 
