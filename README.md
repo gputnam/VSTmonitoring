@@ -66,3 +66,14 @@ Makes a distribution of different types of data for all the channels. Note that 
   - mean_peak_height: the average peak height of hits
   - baseline: the pedestal value
 
+### dump_header.py
+
+Prints out header information (only possible if n_headers was set to > 0 in the VSTAnalysis fcl file). Arguments:
+
+- Specify input file: -i input_file 
+- Specify FEM: -f
+- Specify event: -e
+
+
+
+
