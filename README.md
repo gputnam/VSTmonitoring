@@ -16,6 +16,7 @@ Makes a plot of the waveform (only possible if fill_waveform was set to true in 
 - Display plot: -w
 - Specify channel: -c
 - Specify event: -e
+  - Look for the absolute event number (as opposed to relative entry number from start of file): -a
 - Show pedestal on plot: -b
 - Show peaks on plot: -p
 - Show noise ranges on plot: -n
@@ -29,6 +30,9 @@ Makes a plot of the FFT of the waveform (only possible if calc_fft was set to tr
 - Whether to save the plot: -s
 - Specify output file: -o output_file
 - Display plot: -w
+- Specify channel: -c
+- Specify event: -e
+  - Look for the absolute event number (as opposed to relative entry number from start of file): -a
 
 
 ### interesting_channels.py
@@ -47,6 +51,7 @@ Plots the waveform of every channel summed across a FEM (only possible if sum_wa
 - Display plot: -w
 - Specify FEM: -f
 - Specify event: -e
+  - Look for the absolute event number (as opposed to relative entry number from start of file): -a
 
 
 ### distributions.py
@@ -74,6 +79,7 @@ Prints out header information (only possible if n_headers was set to > 0 in the 
 - Specify input file: -i input_file 
 - Specify FEM: -f
 - Specify event: -e
+  - Look for the absolute event number (as opposed to relative entry number from start of file): -a
 
 
 
