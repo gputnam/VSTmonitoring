@@ -4,6 +4,7 @@ import os
 from array import array
 import argparse
 import math
+from util import *
 
 # TODO @INSTILLATION: update
 def channel_list(fem):
@@ -23,7 +24,7 @@ def main(args):
     
     waveform = adc_data.summed_waveforms[args.fem]
 
-    graph_title = "Event %i FEM %i Summed Waveform" % (args.entry, args.fem)
+    graph_title = "Event %i FEM %i Summed Waveform" % (args.event, args.fem)
     plot(waveform, args.output, graph_title, args)
 
 def plot(adc_data, output_name, graph_title, args):

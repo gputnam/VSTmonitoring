@@ -3,6 +3,7 @@ import sys
 import os
 from array import array
 import argparse
+from util import *
 
 def main(args):
     data_file = ROOT.TFile(args.input_file)

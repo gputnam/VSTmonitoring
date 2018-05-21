@@ -25,7 +25,7 @@ def main(args):
         assert(waveform.size() == 0)
         return
 
-    graph_title = "Event %i Channel %i Waveform" % (args.entry, args.channel)
+    graph_title = "Event %i Channel %i Waveform" % (args.event, args.channel)
     plot(waveform, args.output, adc_data.channel_data[args.channel], graph_title, args)
 
 def plot(adc_data, output_name, channel_data, graph_title, args):

@@ -4,6 +4,7 @@ import sys
 from array import array
 import argparse
 import math
+from util import *
 
 def main(args):
     fft_data_file = ROOT.TFile(args.input_file)
@@ -16,7 +17,7 @@ def main(args):
     real = fft_data.channel_data[args.channel].fft_real
     imag = fft_data.channel_data[args.channel].fft_imag
 
-    graph_title = "Event %i Channel %i FFT" % (args.entry, args.channel)
+    graph_title = "Event %i Channel %i FFT" % (args.event, args.channel)
     plot(real, imag, args.output, graph_title, args)
 
 def plot(fft_real, fft_imag, output_name, graph_title, args):
@@ -29,7 +30,6 @@ def plot(fft_real, fft_imag, output_name, graph_title, args):
         if i < skip:
             continue
         d = math.sqrt((re*re + im*im))
-        print str(d) + ", ",
         fft_data_array.append(d)
         freq_array.append(float(i+skip))
 

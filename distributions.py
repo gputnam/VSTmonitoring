@@ -3,6 +3,7 @@ import sys
 import os
 from array import array
 import argparse
+from util import *
 
 def rms(channel_data):
     return channel_data.rms
@@ -73,7 +74,7 @@ def main(args):
 def plot(hist, args):
     canvas = ROOT.TCanvas("canvas", "Histo Canvas", 250,100,700,500)
     hist.Draw()
-    hist.SetTitle("Weak Peak Distribution")
+    hist.SetTitle("%s Distribution" % args.data)
     hist.GetXaxis().SetTitle(args.data)
     hist.GetYaxis().SetTitle("Number of Channels")
     canvas.Update()
