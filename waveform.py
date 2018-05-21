@@ -4,13 +4,15 @@ import os
 from array import array
 import argparse
 import math
+from util import *
 
 def main(args):
     adc_data_file = ROOT.TFile(args.input_file)
     t_directory_file = adc_data_file.Get("VSTAnalysis")
 
     adc_data = t_directory_file.Get("event") 
-    adc_data.GetEntry(args.entry)
+
+    adc_data = get_event(adc_data, args.event, args.absolute)
 
     waveform = adc_data.channel_data[args.channel].waveform
     channel_data = adc_data.channel_data[args.channel]
@@ -101,21 +103,11 @@ def plot(adc_data, output_name, channel_data, graph_title, args):
     
 
 if __name__ == "__main__":
-    """
-    buildpath = os.environ["SBNDDAQ_ANALYSIS_BUILD_PATH"]
-    if not buildpath:
-        print "ERROR: SBNDDAQ_ANALYSIS_BUILD_PATH not set"
-        sys.exit() 
-    ROOT.gROOT.ProcessLine(".L " + buildpath + "/libsbnddaq_analysis_data_dict.so")
-    """
-
     parser = argparse.ArgumentParser()
-    parser.add_argument("-i", "--input_file", default="output.root")
-    parser.add_argument("-o", "--output", default="waveform")
+    parser = with_location_args(parser)
+    parser = with_io_args(parser)
+
     parser.add_argument("-c", "--channel", type=int, default=0)
-    parser.add_argument("-e", "--entry", type=int, default=0)
-    parser.add_argument("-w", "--wait", action="store_true")
-    parser.add_argument("-s", "--save", action="store_true")
     parser.add_argument("-p", "--draw_peaks", action="store_true")
     parser.add_argument("-b", "--draw_baseline", action="store_true")
     parser.add_argument("-n", "--draw_noise_ranges", action="store_true")

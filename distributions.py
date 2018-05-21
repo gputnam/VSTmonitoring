@@ -84,12 +84,9 @@ def plot(hist, args):
     
 
 if __name__ == "__main__":
-
     parser = argparse.ArgumentParser()
-    parser.add_argument("-i", "--input_file", default="output.root")
-    parser.add_argument("-o", "--output", default="waveform")
-    parser.add_argument("-w", "--wait", action="store_true")
-    parser.add_argument("-s", "--save", action="store_true")
+    parser = with_io_args(parser)
+
     parser.add_argument("-d", "--data", default="rms")
     parser.add_argument("-p", "--per_event", action="store_true")
     parser.add_argument("-v", "--verbose_data", action="store_true")

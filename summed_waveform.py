@@ -14,7 +14,7 @@ def main(args):
     t_directory_file = adc_data_file.Get("VSTAnalysis")
 
     adc_data = t_directory_file.Get("event") 
-    adc_data.GetEntry(args.entry)
+    adc_data = get_event(adc_data, args.event, args.absolute)
 
     empty = adc_data.channel_data[0].empty
     if empty:
@@ -48,13 +48,10 @@ def plot(adc_data, output_name, graph_title, args):
     
 
 if __name__ == "__main__":
-
     parser = argparse.ArgumentParser()
-    parser.add_argument("-i", "--input_file", default="output.root")
-    parser.add_argument("-o", "--output", default="waveform")
+    parser = with_io_args(parser)
+    parser = with_location_args(parser)
+
     parser.add_argument("-f", "--fem", type=int, default=0)
-    parser.add_argument("-e", "--entry", type=int, default=0)
-    parser.add_argument("-w", "--wait", action="store_true")
-    parser.add_argument("-s", "--save", action="store_true")
     
     main(parser.parse_args())

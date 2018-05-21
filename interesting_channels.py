@@ -3,7 +3,7 @@ import argparse
 
 def main(args):
     adc_data_file = ROOT.TFile(args.input_file)
-    t_directory_file = adc_data_file.Get("SimpleDaqAnalysis")
+    t_directory_file = adc_data_file.Get("VSTAnalysis")
 
     adc_data = t_directory_file.Get("event") 
 
