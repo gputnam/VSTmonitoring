@@ -13,7 +13,6 @@ def main(args):
 	fft_data = t_directory_file.Get("event") 
 
 	fft_data = get_event(fft_data, args.event, args.absolute)
-	print(args.absolute)
 
 	graph_title = "Event %i FFT" % (args.event)
 
@@ -39,10 +38,7 @@ def main(args):
 
 	canvas = ROOT.TCanvas("canvas", "Waveform Canvas", 250,100,700,500)
 	graph = ROOT.TGraph2D(n,channel_arr,freq_data,fft1_data)
-	graph.SetTitle(graph_title)
-	graph.GetXaxis().SetTitle("Channel")
-	graph.GetYaxis().SetTitle("Frequency")
-	graph.GetZaxis().SetTitle("FFT Value")
+	graph.SetTitle(graph_title+"; Channel; Frequency(Hz); FFT Value")
 	graph.Draw("COLZ")
 	canvas.Update()
 	if args.wait:
