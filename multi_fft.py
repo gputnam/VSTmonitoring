@@ -40,6 +40,7 @@ def main(args):
 	graph = ROOT.TGraph2D(n,channel_arr,freq_data,fft1_data)
 	graph.SetTitle(graph_title+"; Channel; Frequency(Hz); FFT Value")
 	graph.Draw("COLZ")
+        #canvas.SetLogz()
 	canvas.Update()
 	if args.wait:
 		raw_input("Press Enter to continue...")
@@ -52,14 +53,20 @@ def plot(fft_real, fft_imag, args, w_int):
 	skip = int(not args.keep_baseline)
 	n_data = len(fft_real) - skip
 
+        max_freq = 1000.
+        freq_bin = max_freq / len(fft_real)
+
 	fft_data_array = array('d')
 	freq_array = array('d')
 	for i,(re,im) in enumerate(zip(fft_real, fft_imag)):
+                if i < 300 or i >  900:
+                    continue
+                
 		if i < skip:
 		    continue
 		d = math.sqrt((re*re + im*im))
 		fft_data_array.append(d)
-		freq_array.append(float(i+skip))
+		freq_array.append(float(i+skip) * freq_bin)
 		temp.append(w_int)
 
 	return fft_data_array, freq_array, temp
